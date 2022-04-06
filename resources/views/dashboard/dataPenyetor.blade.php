@@ -18,38 +18,26 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>NIK</th>
+                        <th>Nama Penyetor</th>
+                        <th>Alamat</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td>S12038109238</td>
                         <td>Tiger Nixon</td>
-                        <td>System Architect</td>
                         <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
                     </tr>
                     <tr>
+                        <td>123613618</td>
                         <td>Garrett Winters</td>
-                        <td>Accountant</td>
                         <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>$170,750</td>
                     </tr>
                     <tr>
+                        <td>123456r</td>
                         <td>Donna Snider</td>
-                        <td>Customer Support</td>
                         <td>New York</td>
-                        <td>27</td>
-                        <td>2011/01/25</td>
-                        <td>$112,000</td>
                     </tr>
                 </tbody>
             </table>
