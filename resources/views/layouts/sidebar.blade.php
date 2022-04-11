@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -27,23 +27,33 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="/">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Home</span></a>
 
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('data') }}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Data Penyetor</span></a>
-    </li>
+    @if (Auth::user()->role_id == 1)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('data') }}">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Data Penyetor</span></a>
+        </li>
+
+    @endif
 
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{ route('laporan') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Laporan</span></a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('kategori') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Kategori</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
