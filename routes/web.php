@@ -25,9 +25,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kategori', function () {
         return view('dashboard.kategori');
     })->name('kategori');
+    Route::get('/pengiriman', [DashboardController::class, 'pengiriman'])->name('pengiriman');
 });
 
-// Penyetor
+
 Route::middleware(['IsAdmin'])->group(function () {
     Route::get('/data', [DashboardController::class, 'searchPenyetor'])->name('search');
     Route::get('/data', [DashboardController::class, 'dataPenyetor'])->name('data');
@@ -38,6 +39,10 @@ Route::middleware(['IsAdmin'])->group(function () {
     Route::delete('/delete-penyetor/{id}', [DashboardController::class, 'deletePenyetor'])->name('delete-penyetor');
     Route::get('edit-penyetor/{id}', [DashboardController::class, 'editPenyetor'])->name('edit-penyetor');
     Route::put('update-penyetor/{id}', [DashboardController::class, 'updatePenyetor'])->name('update-penyetor');
+
+    Route::get('/create-pengirim', [DashboardController::class, 'createPengiriman'])->name('create-pengirim');
+    Route::post('/store-pengirim', [DashboardController::class, 'storePengiriman'])->name('store-pengiriman');
+    Route::put('/update-pengirim/{id}', [DashboardController::class, 'changeStatusPengirim'])->name('update-status-pengirim');
 
 });
 

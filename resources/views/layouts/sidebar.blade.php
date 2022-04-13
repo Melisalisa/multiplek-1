@@ -34,13 +34,20 @@
     </li>
 
     @if (Auth::user()->role_id == 1)
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('data') }}">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Data Penyetor</span></a>
-        </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('data') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Data Penyetor</span></a>
+    </li>
+
 
     @endif
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('pengiriman') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Pengiriman</span></a>
+    </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('laporan') }}">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Laporan;
 use App\Models\Kategori;
+use App\Models\Pengiriman;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -105,4 +106,42 @@ class DashboardController extends Controller
 
         return redirect()->route('laporan');
     }
+
+    // Pengiriman
+    public function pengiriman(){
+        $pengiriman = Pengiriman::with('User','kategori')->paginate(10);
+        return view('dashboard.pengiriman', compact('pengiriman'));
+    }
+
+    public function createPengiriman(){
+        // create laporan store
+        $kategori = Kategori::all();
+        return view('dashboard.createPengiriman', compact('kategori'));
+    }
+
+    // create store pengiriman
+    public function storePengiriman(Request $request){
+        // create laporan store
+        // dd($request);
+        $createPengiriman = $request->validate([
+            'kategori_id' => 'required',
+            'user_id' => 'required',
+            'tanggal' => 'required',
+            'jumlah_stok' => 'required',
+        ]);
+
+        Pengiriman::create($createPengiriman);
+
+        return redirect()->route('pengiriman');
+    }
+
+    public function changeStatusPengirim(Request $request,$id){
+        $pengiriman = Pengiriman::find($id);
+        $pengiriman->update([
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('pengiriman');
+    }
+
 }
