@@ -5,18 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Laporan;
 use App\Models\Kategori;
+use Barryvdh\DomPDF\Facade as  PDF;
 use App\Models\Pengiriman;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    // use PDF;
     public function index()
     {
         return view('dashboard.index');
     }
 
-    public  function dataPenyetor(){
+    public function dataPenyetor(){
         $dataPenyetor = User::paginate(10);
+        return view('dashboard.dataPenyetor', compact('dataPenyetor'));
+    }
+
+    public function searchPenyetor(Request $request){
+        $keyword = $request->search;
+        $dataPenyetor = User::where('name', 'like', '%'. $keyword . '%')->paginate(10);
+        // dd($dataPenyetor);
         return view('dashboard.dataPenyetor', compact('dataPenyetor'));
     }
 
@@ -69,14 +78,6 @@ class DashboardController extends Controller
         return redirect()->route('data');
     }
 
-    public function searchPenyetor(Request $request){
-        $keyword = $request->search;
-        $dataPenyetor = User::where('name', 'like', '%'. $keyword . '%')->paginate(6);
-        return view('welcome', [
-            'dataPenyetor' => $dataPenyetor,
-        ]);
-    }
-
     // Laporan
 
     public function laporan(){
@@ -84,6 +85,19 @@ class DashboardController extends Controller
 
         // dd($laporan);
         return view('dashboard.laporan', compact('laporan'));
+    }
+
+    public function laporanTable(){
+        $laporan = Laporan::with('User','kategori')->get();
+
+        // dd($laporan);
+        return view('dashboard.laporanTable', compact('laporan'));
+    }
+
+    public function cetakLaporan(){
+        $laporan = Laporan::with('User','kategori')->get();
+        $pdf = PDF::loadview('dashboard.laporanTable', compact('laporan'));
+        return $pdf->stream();
     }
 
     public function createLaporan(){
