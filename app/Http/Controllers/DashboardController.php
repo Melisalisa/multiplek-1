@@ -81,14 +81,24 @@ class DashboardController extends Controller
     // Laporan
 
     public function laporan(){
-        $laporan = Laporan::with('User','kategori')->paginate(10);
+        if (Auth()->user()->role_id == 1) {
+            $laporan = Laporan::with('User','kategori')->paginate(10);
+        }else{
+            $laporan = Laporan::with('User','kategori')->where('user_id', Auth()->user()->id)->paginate(10);
+        }
 
         // dd($laporan);
         return view('dashboard.laporan', compact('laporan'));
     }
 
     public function laporanTable(){
-        $laporan = Laporan::with('User','kategori')->get();
+
+
+        if (Auth()->user()->role_id == 1) {
+            $laporan = Laporan::with('User','kategori')->get();
+        }else{
+            $laporan = Laporan::with('User','kategori')->where('user_id', Auth()->user()->id)->get();
+        }
 
         // dd($laporan);
         return view('dashboard.laporanTable', compact('laporan'));
